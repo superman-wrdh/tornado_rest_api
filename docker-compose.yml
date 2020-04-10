@@ -1,0 +1,9 @@
+# https://docs.docker.com/compose/compose-file/compose-file-v2/
+version: '2.1'
+services:
+  api:
+    build: .
+    ports:
+      - "8888:8888"
+    environment:
+      - runmode=prd
