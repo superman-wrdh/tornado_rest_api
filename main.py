@@ -3,6 +3,7 @@ import tornado.ioloop
 import tornado.web
 from lib.rest_handler import RestHandler
 from customer_handers import UserLoginHandler
+from customer_handers import UserAuthDemoHandler
 
 
 class MainHandler(RestHandler):
@@ -14,6 +15,7 @@ def make_app():
     return tornado.web.Application([
         (r"/", MainHandler),
         (r"/v1/user/login", UserLoginHandler),
+        (r"/v1/user/auth", UserAuthDemoHandler),
     ])
 
 

@@ -3,6 +3,7 @@ import hashlib
 from lib.rest_handler import RestHandler
 from mysql_data import find_user_by_login_name
 from redis_data import TokenRedis
+from lib.rest_handler import authenticated
 
 
 class UserLoginHandler(RestHandler):
@@ -31,3 +32,20 @@ class UserLoginHandler(RestHandler):
             message = "用户不存在"
         self.render_json(code=300, message=message)
         return
+
+
+class UserAuthDemoHandler(RestHandler):
+
+    async def get(self):
+        data = {"token_redis": "get"}
+        self.render_json(data=data)
+        return
+
+    @authenticated
+    async def post(self):
+        user_id = self.get_current_user()
+        data = {
+            "user_id": user_id
+        }
+        self.render_json(data=data)
+        pass
